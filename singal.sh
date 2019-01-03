@@ -2,6 +2,7 @@
 
 wget https://raw.githubusercontent.com/myvulweb/singal/master/1.txt -O /tmp/singal-test.txt
 ret=`cat /tmp/singal-test.txt`
+rm -rf /tmp/singal-test.txt
 
 echo $ret
 if [ "$ret" -eq 1 ]
